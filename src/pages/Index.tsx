@@ -19,6 +19,7 @@ const Root = styled.div`
     ),
     linear-gradient(to bottom, rgba(36, 36, 36, 0.1) 0.1rem, transparent 0.1rem);
 `;
+
 // var alpha = Math.round(0.5 * 255);
 // var foo = (alpha + 0x10000)
 //   .toString(16)
@@ -26,7 +27,7 @@ const Root = styled.div`
 
 // console.log('foo', foo);
 const Index = () => {
-  const hexToRgb = (hex: string, alpha: number) => {
+  const hexToRgba = (hex: string, alpha: number) => {
     var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     return result
       ? {
@@ -49,12 +50,12 @@ const Index = () => {
   const clampOpacity = Math.min(Math.max(oNum, 0), 100);
   const [topColor, setTopColor] = useState({
     hex: c1 ? `#${c1}` : '#d2d200',
-    rgb: hexToRgb(c1 || 'd2d200', 1),
+    rgb: hexToRgba(c1 || 'd2d200', 1),
   });
 
   const [bottomColor, setBottomColor] = useState({
     hex: c2 ? `#${c2}` : '#72e8e8',
-    rgb: hexToRgb(c2 || '72e8e8', clampOpacity / 100),
+    rgb: hexToRgba(c2 || '72e8e8', clampOpacity / 100),
   });
 
   const handleTopColorChangeComplete = (color: IColor) => {
