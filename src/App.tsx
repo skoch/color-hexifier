@@ -2,7 +2,7 @@ import 'normalize.css';
 
 import React from 'react';
 import styled from 'styled-components';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 
 import Index from './pages/Index';
 
@@ -22,7 +22,10 @@ const App: React.FC = () => {
       <BrowserRouter>
         <Main className="content">
           <Switch>
-            <Route path="/" component={Index} exact />
+            <Route path="/:c1?/:c2?/:opacity?" component={Index} />
+            <Route exact path="/">
+              <Redirect to="/d2d200/72e8e8/50" />
+            </Route>
           </Switch>
         </Main>
       </BrowserRouter>

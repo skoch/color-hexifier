@@ -1,6 +1,6 @@
-import React, { memo } from 'react';
 import styled from 'styled-components';
 import { ChromePicker } from 'react-color';
+import React, { memo, useState } from 'react';
 
 // export type Attributes = Omit<HTMLAttributes<HTMLDivElement>, 'color'>;
 
@@ -19,9 +19,9 @@ export interface IColor {
 // interface Props extends Attributes {
 interface Props {
   color: IColor;
-  useHex?: boolean;
   disableAlpha?: boolean;
   onChange?(color: any): void;
+  onChangeComplete?(color: any): void;
 }
 
 const Root = styled.div`
@@ -30,12 +30,6 @@ const Root = styled.div`
   align-items: center;
   justify-content: center;
   height: 33.33333%;
-
-  &.grid {
-    background-size: 5rem 5rem;
-    background-image: linear-gradient(to right, rgba(36, 36, 36, 0.1) 0.1rem, transparent 0.1rem),
-      linear-gradient(to bottom, rgba(36, 36, 36, 0.1) 0.1rem, transparent 0.1rem);
-  }
 `;
 
 const Text = styled.h3`
@@ -44,37 +38,62 @@ const Text = styled.h3`
   justify-content: center;
   font-size: 4rem;
   font-weight: normal;
-  /* width: 50%; */
   margin: 1rem;
+
+  &.large {
+    font-size: 6rem;
+  }
 `;
 
 const PickerWrapper = styled.div`
-  display: flex;
+  position: absolute;
+  z-index: 10;
+  /* display: flex;
   align-items: center;
   justify-content: center;
-  /* width: 50%; */
-  margin: 1rem;
+  margin: 1rem; */
 `;
 
-const ColorBlock = ({ color, useHex, onChange, disableAlpha }: Props) => {
-  const {r, g, b, a } = color.rgb;
+const Cover = styled.div`
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+`;
+
+const ColorBlock = ({
+  color,
+  onChange,
+  disableAlpha,
+  onChangeComplete,
+}: Props) => {
+  const { r, g, b, a } = color.rgb;
   const bgColor = `rgba(${r}, ${g}, ${b}, ${a})`;
+
+  const [showPicker, setShowPicker] = useState(false);
 
   return (
     <Root
-      className={a < 1 ? 'grid' : ''}
       style={{
         backgroundColor: bgColor,
       }}
     >
-      <Text>{useHex ? color.hex.toUpperCase() : bgColor}</Text>
+      <Text
+        className={!onChange ? 'large' : ''}
+        onClick={() => setShowPicker(true)}
+      >
+        {color.hex.toUpperCase()}
+      </Text>
 
-      {onChange && (
+      {showPicker && onChange && onChangeComplete && (
         <PickerWrapper>
+          <Cover onClick={() => setShowPicker(false)} />
           <ChromePicker
             disableAlpha={disableAlpha}
             color={color.rgb}
             onChange={onChange}
+            onChangeComplete={onChangeComplete}
           />
         </PickerWrapper>
       )}
