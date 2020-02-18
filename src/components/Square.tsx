@@ -18,11 +18,18 @@ interface Props extends Attributes{
 const Text = styled.h3`
   font-size: 4rem;
   font-weight: normal;
-  margin: 2rem;
+  margin: 1rem;
   cursor: pointer;
 
   &.large {
     font-size: 6rem;
+    @media (max-width: 414px) {
+      font-size: 3rem;
+    }
+  }
+
+  @media (max-width: 414px) {
+    font-size: 2.4rem;
   }
 `;
 
