@@ -30,7 +30,12 @@ const ColorContainer = styled.div`
   position: relative;
   width: 66rem;
   height: 66rem;
-  margin: 2rem
+  margin: 2rem;
+
+  @media (max-width: 699px) {
+    width: calc(100vw - 4rem);
+    height: 100%;
+  }
 `;
 
 const LargeWrapper = styled.div`
@@ -41,6 +46,10 @@ const LargeWrapper = styled.div`
   &.bottom {
     bottom: 0;
     right: 0;
+  }
+  @media (max-width: 699px) {
+    width: calc(100vw - 4rem);
+    height: 75%;
   }
 `;
 
@@ -57,6 +66,9 @@ const SmallWrapper = styled.div`
     bottom: 0;
     left: 0;
   }
+  @media (max-width: 699px) {
+    display: none;
+  }
 `;
 
 const TargetColorText = styled.h3`
@@ -70,6 +82,10 @@ const TargetColorText = styled.h3`
   font-size: 6rem;
   font-weight: normal;
   margin: 0;
+
+  @media (max-width: 414px) {
+    font-size: 4rem;
+  }
 `;
 
 const Header = styled.h1`
@@ -82,11 +98,20 @@ const Header = styled.h1`
   margin: 2rem;
   border: 1px solid #242424;
   width: calc(66rem - 0.2rem);
+  @media (max-width: 699px) {
+    width: calc(100vw - 4.2rem);
+  }
+  @media (max-width: 414px) {
+    font-size: 2.4rem;
+  }
 `;
 
 const ParagraphsWrapper = styled.div`
   width: 66rem;
   margin: 0 2rem;
+  @media (max-width: 699px) {
+    width: calc(100vw - 4rem);
+  }
 `;
 
 const Paragraph = styled.p`
@@ -96,6 +121,11 @@ const Paragraph = styled.p`
   margin: 0;
   display: flex;
   align-items: center;
+  @media (max-width: 699px) {
+    font-size: 1.8rem;
+    height: auto;
+    margin-bottom: 0.5rem;
+  }
 `;
 
 // var alpha = Math.round(0.5 * 255);
@@ -162,9 +192,9 @@ const Index = () => {
     <Root>
       <Header>Color Mixer</Header>
       <ParagraphsWrapper>
-        <Paragraph>The center hex color is the mixed color.</Paragraph>
-        <Paragraph>Click the top or bottom hex colors to change.</Paragraph>
-        <Paragraph>Only the bottom color has opacity.</Paragraph>
+        <Paragraph>Click top and bottom hex colors to change.</Paragraph>
+        <Paragraph>Bottom color has opacity.</Paragraph>
+        <Paragraph>Center hex color is the mixed color.</Paragraph>
       </ParagraphsWrapper>
       <ColorContainer>
         <TargetColorText
