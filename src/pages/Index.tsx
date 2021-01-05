@@ -26,6 +26,13 @@ const Root = styled.div`
 //   .substr(-2);
 
 // console.log('foo', foo);
+
+interface ParamTypes {
+  c1: string;
+  c2: string;
+  opacity: string;
+}
+
 const Index = () => {
   const hexToRgba = (hex: string, alpha: number) => {
     var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
@@ -45,7 +52,7 @@ const Index = () => {
   };
 
   const history = useHistory();
-  const { c1, c2, opacity } = useParams();
+  const { c1, c2, opacity } = useParams<ParamTypes>();
   const oNum = opacity ? Number(opacity) : 50;
   const clampOpacity = Math.min(Math.max(oNum, 0), 100);
   const [topColor, setTopColor] = useState({
