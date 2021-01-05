@@ -28,8 +28,8 @@ const Root = styled.div`
 
 const ColorContainer = styled.div`
   position: relative;
-  width: 66rem;
-  height: 66rem;
+  width: 64rem;
+  height: 64rem;
   margin: 2rem;
 
   @media (max-width: 699px) {
@@ -40,8 +40,8 @@ const ColorContainer = styled.div`
 
 const LargeWrapper = styled.div`
   position: absolute;
-  width: 50rem;
-  height: 50rem;
+  width: 48rem;
+  height: 48rem;
 
   &.bottom {
     bottom: 0;
@@ -97,7 +97,7 @@ const Header = styled.h1`
   align-items: center;
   margin: 2rem;
   border: 1px solid #242424;
-  width: calc(66rem - 0.2rem);
+  width: calc(64rem - 0.2rem);
   @media (max-width: 699px) {
     width: calc(100vw - 4.2rem);
   }
@@ -107,7 +107,7 @@ const Header = styled.h1`
 `;
 
 const ParagraphsWrapper = styled.div`
-  width: 66rem;
+  width: 64rem;
   margin: 0 2rem;
   @media (max-width: 699px) {
     width: calc(100vw - 4rem);
@@ -133,19 +133,25 @@ const Paragraph = styled.p`
 //   .toString(16)
 //   .substr(-2);
 
+interface ParamTypes {
+  c1: string;
+  c2: string;
+  opacity: string;
+}
+
 const Index = () => {
   const history = useHistory();
-  const { c1, c2, opacity } = useParams();
+  const { c1, c2, opacity } = useParams<ParamTypes>();
   const oNum = opacity ? Number(opacity) : 50;
   const clampOpacity = Math.min(Math.max(oNum, 0), 100);
   const [topColor, setTopColor] = useState({
-    hex: c1 ? `#${c1}` : '#d2d200',
-    rgb: hexToRgba(c1 || 'd2d200', 1),
+    hex: c1 ? `#${c1}` : '#d25800',
+    rgb: hexToRgba(c1 || 'd25800', 1),
   });
 
   const [bottomColor, setBottomColor] = useState({
-    hex: c2 ? `#${c2}` : '#72e8e8',
-    rgb: hexToRgba(c2 || '72e8e8', clampOpacity / 100),
+    hex: c2 ? `#${c2}` : '#f3a40e',
+    rgb: hexToRgba(c2 || 'f3a40e', clampOpacity / 100),
   });
 
   const handleTopColorChangeComplete = (color: IColor) => {
