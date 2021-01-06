@@ -12,18 +12,18 @@ import { rgbToHex, getContrast, hexToRgba } from '../utils/misc';
 const Root = styled.div`
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
-  /* justify-content: center; */
   color: #242424;
   height: 100vh;
   width: 100vw;
-  background-size: 2rem 2rem;
+
+  /* rgba(36, 36, 36, 0.1) 0.1rem, */
   background-image: linear-gradient(
       to right,
-      rgba(36, 36, 36, 0.1) 0.1rem,
+      #e9e9e9 0.1rem,
       transparent 0.1rem
     ),
-    linear-gradient(to bottom, rgba(36, 36, 36, 0.1) 0.1rem, transparent 0.1rem);
+    linear-gradient(to bottom, #e9e9e9 0.1rem, transparent 0.1rem);
+  background-size: 2rem 2rem;
 `;
 
 const ColorContainer = styled.div`
