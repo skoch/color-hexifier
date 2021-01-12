@@ -86,6 +86,8 @@ const TargetColorText = styled.h3`
   @media (max-width: 414px) {
     font-size: 4rem;
   }
+
+  cursor: pointer;
 `;
 
 const Header = styled.h1`
@@ -192,6 +194,42 @@ const Index = () => {
     };
   };
 
+  const fallbackCopyTextToClipboard = (text: string) => {
+    var textArea = document.createElement('textarea');
+    textArea.value = text;
+
+    // Avoid scrolling to bottom
+    textArea.style.top = '0';
+    textArea.style.left = '0';
+    textArea.style.position = 'fixed';
+
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+
+    try {
+      document.execCommand('copy');
+      // feedback if successful, above returns boolean
+    } catch (e) {
+      console.error('Oops, unable to copy', e);
+    }
+
+    document.body.removeChild(textArea);
+  };
+
+  const copyTextToClipboard = (text: string) => {
+    if (!navigator.clipboard) {
+      fallbackCopyTextToClipboard(text);
+      return;
+    }
+
+    navigator.clipboard.writeText(text).then(
+      // feedback?
+    ).catch((e) => {
+      console.error('Oops, unable to copy', e);
+    });
+  };
+
   const tCol = targetColor();
 
   return (
@@ -204,6 +242,7 @@ const Index = () => {
       </ParagraphsWrapper>
       <ColorContainer>
         <TargetColorText
+          onClick={() => copyTextToClipboard(tCol.hex)}
           style={{
             color: getContrast(tCol.hex),
           }}
